@@ -10,7 +10,7 @@ dotenv.config();
 const { SECRET_KEY } = process.env;
 
 const register = async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, name } = req.body;
     const user = await User.findOne({ email });
     if (user) {
         res.status(409);
@@ -25,6 +25,7 @@ const register = async (req, res) => {
     });
 
     res.status(201).json({
+        name: newUser.name,
         email: newUser.email,
         password: newUser.password,
     });
